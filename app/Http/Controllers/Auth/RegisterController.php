@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Notifications\AdminNotification;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification as FacadesNotification;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -86,6 +89,8 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
+        FacadesNotification::send($user, new AdminNotification($user));
+
         Auth::login($user);
         return redirect() -> route('admin.login');
     }
