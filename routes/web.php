@@ -35,3 +35,4 @@ Route::post('admin/logout', [App\Http\Controllers\Auth\LoginController::class, '
 
 // post route
 Route::resource('post', 'App\Http\Controllers\PostController');
+Route::resource('category', 'App\Http\Controllers\CategoryController');
