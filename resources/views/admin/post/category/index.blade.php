@@ -31,7 +31,10 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <a class="btn btn-primary" href="#">Add New Category</a>
+
+                        @include('validate')
+
+                        <a  class="btn btn-primary" data-toggle="modal" href="#add_category_modal">Add New Category</a>
                         <br>
                         <br>
                         <div class="card">
@@ -44,27 +47,39 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Post title</th>
-                                                <th>Category</th>
-                                                <th>Tag</th>
+                                                <th>Category name</th>
+                                                <th>Category slug</th>
                                                 <th>Date</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ($all_data as $data)
 
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                         <tr>
+                                            <td>1</td>
+                                            <td>{{ $data -> name }}</td>
+                                            <td>{{ $data -> slug }}</td>
+                                            <td>{{ $data -> created_at -> diffForHumans() }}</td>
+                                            @if ($data -> status == true)
+                                            <td>
+                                                <span class="badge badge-success">Published</span>
+                                            </td>
+                                            @else
+                                                <span class="badge badge-danger">Unpublished</span>
+
+                                            @endif
+
+
                                             <td>
                                                 <a class="btn btn-info" href="#">view</a>
                                                 <a class="btn btn-warning" href="#">edit</a>
                                                 <a class="btn btn-danger" href="#">delete</a>
                                             </td>
+                                        </tr>
 
-
+                                        @endforeach
 
                                         </tbody>
                                     </table>
@@ -73,13 +88,7 @@
                         </div>
                     </div>
 
-
                 </div>
-
-
-
-
-
 
             </div>
         </div>
@@ -87,5 +96,32 @@
 
     </div>
     <!-- /Main Wrapper -->
+
+
+{{-- add category modal --}}
+    <div id="add_category_modal" class="modal fade">
+        <div class="modal-dialog modal-dialog-center">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h2>Add new Category</h2>
+                    <hr>
+                    <form action="{{ route('category.store') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="Name"></label>
+                            <input name="name" type="text" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+
+                            <input type="submit" class="btn btn-primary btn-sm">
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 @endsection
