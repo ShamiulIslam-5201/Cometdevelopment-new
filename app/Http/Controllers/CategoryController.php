@@ -94,6 +94,24 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete_data = Category::find($id);
+        $delete_data -> delete();
+        return redirect() -> back()-> with('confirm', 'Category deleted successfully');
     }
+
+
+    public function statusUpdateInctive($id)
+    {
+        $status_update = Category::find($id);
+        $status_update -> status = false;
+        $status_update -> update();
+    }
+
+    public function statusUpdateActive($id){
+
+        $status_update = Category::find($id);
+        $status_update -> status = true;
+        $status_update -> update();
+    }
+
 }

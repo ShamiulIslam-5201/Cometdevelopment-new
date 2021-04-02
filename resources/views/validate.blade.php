@@ -10,3 +10,4 @@
         swal('success', '{{ Session::get('success') }}', 'success')
     </script>
 @endif
+

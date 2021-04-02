@@ -58,24 +58,27 @@
                                             @foreach ($all_data as $data)
 
                                          <tr>
-                                            <td>1</td>
+                                            <td>{{ $loop -> index+1 }}</td>
                                             <td>{{ $data -> name }}</td>
                                             <td>{{ $data -> slug }}</td>
                                             <td>{{ $data -> created_at -> diffForHumans() }}</td>
-                                            @if ($data -> status == true)
                                             <td>
-                                                <span class="badge badge-success">Published</span>
+                                                <div class="status-toggle">
+                                                    <input  type="checkbox" status_id="{{ $data -> id }}"  {{ ( $data -> status == true ? 'checked="checked"' : '' ) }} id="cat_status_{{ $loop -> index + 1 }}" class="check cat_check" >
+                                                    <label for="cat_status_{{ $loop -> index + 1 }}" class="checktoggle">checkbox</label>
+                                                </div>
                                             </td>
-                                            @else
-                                                <span class="badge badge-danger">Unpublished</span>
-
-                                            @endif
 
 
                                             <td>
-                                                <a class="btn btn-info" href="#">view</a>
-                                                <a class="btn btn-warning" href="#">edit</a>
-                                                <a class="btn btn-danger" href="#">delete</a>
+                                                <a class="btn btn-warning" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a>
+
+                                                    <form class="d-inline" action="{{ route('category.destroy',  $data -> id) }}" method="POST">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button class="btn btn-danger btn-sm delete-btn"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                    </form>
+
                                             </td>
                                         </tr>
 
