@@ -71,9 +71,9 @@
 
 
                                             <td>
-                                                <a edit_id="{{ $data -> id }}" class="btn btn-sm btn-warning edit_cat" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                <a edit_id="{{ $data -> id }}" class="btn btn-sm btn-warning edit_tag" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 
-                                                    <form class="d-inline" action="{{ route('category.destroy',  $data -> id) }}" method="POST">
+                                                    <form class="d-inline" action="{{ route('tag.destroy',  $data -> id) }}" method="POST">
                                                         @csrf
                                                         @method('delete')
                                                         <button class="btn btn-danger btn-sm delete-btn"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -101,7 +101,7 @@
     <!-- /Main Wrapper -->
 
 
-{{-- add category modal --}}
+{{-- add tag modal --}}
     <div id="add_tag_modal" class="modal fade">
         <div class="modal-dialog modal-dialog-center">
             <div class="modal-content">
@@ -125,7 +125,7 @@
 
 
 
-    {{-- edit category modal --}}
+    {{-- edit tag modal --}}
     <div id="edit_tag_modal" class="modal fade">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -148,6 +148,8 @@
             </div>
         </div>
     </div>
+
+
 
 
 

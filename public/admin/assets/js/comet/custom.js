@@ -62,6 +62,39 @@
 
     });
 
+    //Update/edit Tag
+    $('.edit_tag').click(function(e){
+
+        e.preventDefault();
+
+        let id = $(this).attr('edit_id');
+
+        $.ajax({
+            url : 'tag/' +id+ '/edit',
+            success : function(data){
+                $('#edit_tag_modal form input[name="name"]').val(data.name);
+                $('#edit_tag_modal form input[name="edit_id"]').val(data.id);
+                $('#edit_tag_modal').modal('show');
+            }
+        });
+
+    });
+
+
+    // DELETE pOST
+    $('.delete-btn').click(function(e){
+
+        let conf = confirm('Are  you sure ?');
+
+            if( conf == true ){
+                return true;
+            }else {
+                return false;
+            }
+
+    });
+
+
 
 })(jQuery)
 

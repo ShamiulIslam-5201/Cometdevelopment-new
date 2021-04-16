@@ -71,7 +71,13 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //
+        $edit_data = Tag::find($id);
+
+        return [
+            'id' => $edit_data -> id,
+            'nama' => $edit_data -> name
+
+        ];
     }
 
     /**
@@ -83,7 +89,15 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+            $edit_id = $request -> edit_id;
+
+            $edit_data =  Tag::find($edit_id);
+            $edit_data -> name = $request -> name;
+            $edit_data -> slug = Str::slug($request -> name);
+            $edit_data -> update();
+
+            return redirect() -> back() -> with('success', 'Tag updated successful');
     }
 
     /**
@@ -92,8 +106,10 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+     public function destroy($id)
     {
-        //
+        $delete_data = Tag::find($id);
+        $delete_data -> delete();
+        return redirect() -> back()-> with('confirm', 'Tag deleted successfully');
     }
 }
